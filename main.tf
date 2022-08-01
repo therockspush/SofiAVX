@@ -1,6 +1,6 @@
 resource "aviatrix_vpc" "firenet_vpc1" {
   cloud_type           = 1
-  account_name         = ""
+  account_name         = "flottaws"
   region               = "us-west-2"
   name                 = "aws-firenet1"
   cidr                 = "10.15.16.0/23"
@@ -10,7 +10,7 @@ resource "aviatrix_vpc" "firenet_vpc1" {
 
 resource "aviatrix_vpc" "tgw_vpc2" {
   cloud_type           = 1
-  account_name         = ""
+  account_name         = "flottaws"
   region               = "us-west-2"
   name                 = "aws-common"
   cidr                 = "10.17.18.0/24"
@@ -20,7 +20,7 @@ resource "aviatrix_vpc" "tgw_vpc2" {
 
 
 resource "aviatrix_aws_tgw" "test_aws_tgw1" {
-  account_name                      = ""
+  account_name                      = "flottaws"
  
   aws_side_as_number                = "64513"
   manage_vpc_attachment             = false
@@ -52,7 +52,7 @@ resource "aviatrix_aws_tgw" "test_aws_tgw1" {
 
 resource "aviatrix_transit_gateway" "test_transit_gateway_aws" {
   cloud_type               = 1
-  account_name             = ""
+  account_name             = "flottaws"
   gw_name                  = "firenet1"
   vpc_id                   = aviatrix_vpc.firenet_vpc1.vpc_id
   vpc_reg                  = "us-west-2"
@@ -71,7 +71,7 @@ resource "aviatrix_aws_tgw_vpc_attachment" "firenet_attachment1" {
   tgw_name             = aviatrix_aws_tgw.test_aws_tgw1.id
   region               = "us-west-2"
   security_domain_name = "firewall-domain"
-  vpc_account_name     = ""
+  vpc_account_name     = "flottaws"
   vpc_id               = aviatrix_vpc.firenet_vpc1.vpc_id
 }
 
@@ -79,7 +79,7 @@ resource "aviatrix_aws_tgw_vpc_attachment" "vpc_attachment1" {
   tgw_name             = aviatrix_aws_tgw.test_aws_tgw1.id
   region               = "us-west-2"
   security_domain_name = "Shared_Service_Domain"
-  vpc_account_name     = ""
+  vpc_account_name     = "flottaws"
   vpc_id               = aviatrix_vpc.tgw_vpc2.vpc_id
   #customized_routes    = "10.0.0.0/8"
 }
